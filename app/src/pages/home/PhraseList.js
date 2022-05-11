@@ -28,15 +28,7 @@ function PhraseList(props) {
                         <label className="form-check-label">
                           {phrase}
                         </label>
-                        <div style={{
-                          backgroundColor: "#ff6666",
-                          padding: "5px",
-                          width: "40px",
-                          height: "30px",
-                          textAlign: "center",
-                          borderRadius: "5px",
-                          cursor: "pointer"
-                        }} onClick={_ => props.deletePhrase(id, phrase)}>
+                        <div className="button-delete-phrase" onClick={_ => props.deletePhrase(id, phrase)}>
                           <FontAwesomeIcon icon={faTrashCan} color="white" />
                         </div>
                       </div>
