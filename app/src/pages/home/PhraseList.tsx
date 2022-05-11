@@ -2,8 +2,17 @@ import "./style.css"
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { Phrase } from "../../models/Phrase"
 
-function PhraseList(props) {
+interface Props {
+  phraseList: Phrase[]
+  phrase: string
+  setPhrase: (value: string) => void
+  deletePhrase: (id: number, phrase: string) => void
+  addPhrase: () => void
+}
+
+function PhraseList(props: Props) {
 
   return (
     <div className="col-md-12" style={{ margin: "50px 0" }}>
@@ -20,7 +29,7 @@ function PhraseList(props) {
           <div className="list-wrapper">
             <ul className="d-flex flex-column-reverse todo-list">
               {
-                props.phrases.sort((a, b) => a.createdAt - b.createdAt).map(({ phrase, id }) => {
+                props.phraseList.sort((a, b) => a.createdAt - b.createdAt).map(({ phrase, id }) => {
                   return (
                     <li>
                       <div className="form-check" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>

@@ -5,9 +5,10 @@ import GitList from "./GifList";
 import PhraseList from "./PhraseList";
 import { Serverless, Giphy } from "../../config"
 import { UserContext } from "../../context/userContext";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import { Phrase } from "../../models/Phrase";
 
-const toastDefaultConfig = {
+const toastDefaultConfig: ToastOptions<any> = {
   position: "top-right",
   autoClose: 4000,
   hideProgressBar: false,
@@ -20,8 +21,8 @@ const toastDefaultConfig = {
 function Home() {
 
   const notifyAdd = () => toast.success("Frase adicionada com sucesso!", toastDefaultConfig);
-  const notifyErrorAdd = (phrase) => toast.error(`Frase ${phrase} já foi adicionada`, toastDefaultConfig);
-  const notifyRemove = (phrase) => toast.success(`Frase ${phrase} foi removida!`, toastDefaultConfig);
+  const notifyErrorAdd = (phrase: string) => toast.error(`Frase ${phrase} já foi adicionada`, toastDefaultConfig);
+  const notifyRemove = (phrase: string) => toast.success(`Frase ${phrase} foi removida!`, toastDefaultConfig);
 
   const { signOut, user } = useContext(UserContext)
 
@@ -39,19 +40,19 @@ function Home() {
     getGifs(result.data.body)
   }
 
-  async function getGifs(phrases) {
-    phrases.forEach(async ({id, phrase, createdAt}) => {
+  async function getGifs(phrases: Phrase[]) {
+    phrases.forEach(async ({ id, phrase, createdAt }) => {
       const result = await axios.get(Giphy.API.handler(phrase))
       setGifs(state => [...state, { id, createdAt, url: result.data.data[0].images.original.url }])
     })
   }
 
-  async function addGif({id, phrase, createdAt}) {
+  async function addGif({ id, phrase, createdAt }) {
     const result = await axios.get(Giphy.API.handler(phrase))
-    setGifs(state => [{ id, createdAt,  url: result.data.data[0].images.original.url }, ...state])
+    setGifs(state => [{ id, createdAt, url: result.data.data[0].images.original.url }, ...state])
   }
 
-  async function deleteGif(id) {
+  async function deleteGif(id: number) {
     setGifs(state => state.filter(item => item.id !== id))
   }
 
@@ -62,7 +63,7 @@ function Home() {
         phrase
       })
 
-      if(result.data.body.error) {
+      if (result.data.body.error) {
         return notifyErrorAdd(phrase)
       }
 
@@ -76,7 +77,7 @@ function Home() {
     }
   }
 
-  async function deletePhrase(id, name) {
+  async function deletePhrase(id: number, name: string) {
     try {
 
       const result = await axios.post(Serverless.API.handler("/delete-phrase"), { userId: user.id, id })
@@ -96,7 +97,7 @@ function Home() {
       </div>
       <div className="row justify-content-center">
         <PhraseList
-          phrases={phrases}
+          phraseList={phrases}
           phrase={phrase}
           setPhrase={setPhrase}
           addPhrase={addPhrase}

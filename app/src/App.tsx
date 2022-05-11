@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { UserContext } from "./context/userContext";
 import Home from "./pages/home/Index";

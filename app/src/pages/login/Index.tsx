@@ -1,6 +1,5 @@
 import "./style.css"
-import axios from "axios"
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from "../../context/userContext";
 
 function Login() {
@@ -21,13 +20,13 @@ function Login() {
                 <h3 className="mb-5">Entrar</h3>
 
                 <div className="form-outline mb-4">
-                  <label className="form-label" for="typeEmailX-2">Username</label>
+                  <label className="form-label" htmlFor="typeEmailX-2">Username</label>
                   <input type="text" id="typeEmailX-2" className="form-control form-control-lg"
                     onChange={event => setUsername(event.target.value)} value={username} />
                 </div>
 
                 <div className="form-outline mb-4">
-                  <label className="form-label" for="typePasswordX-2">Senha</label>
+                  <label className="form-label" htmlFor="typePasswordX-2">Senha</label>
                   <input type="password" id="typePasswordX-2" className="form-control form-control-lg"
                     onChange={event => setPassword(event.target.value)} value={password} />
                 </div>
@@ -38,8 +37,6 @@ function Login() {
                 <button className="btn btn-primary btn-lg btn-block" onClick={_ => signIn(username, password)}>
                   Login
                 </button>
-
-
               </div>
             </div>
           </div>
