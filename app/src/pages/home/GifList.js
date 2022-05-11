@@ -1,11 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import axios from "axios"
 
 function GitList(props) {
-
-  useEffect(() => {
-    console.log(props)
-  }, [props.gifs])
 
   return (
     <Fragment>

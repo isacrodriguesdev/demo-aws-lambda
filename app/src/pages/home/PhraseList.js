@@ -1,6 +1,5 @@
 import "./style.css"
-import React, { useEffect, useState } from 'react';
-import axios from "axios"
+import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 
@@ -32,7 +31,6 @@ function PhraseList(props) {
                           <FontAwesomeIcon icon={faTrashCan} color="white" />
                         </div>
                       </div>
-                      {/* <i className="remove mdi mdi-close-circle-outline"></i> */}
                     </li>
                   )
                 })
