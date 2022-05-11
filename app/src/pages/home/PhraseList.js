@@ -21,7 +21,7 @@ function PhraseList(props) {
           <div className="list-wrapper">
             <ul className="d-flex flex-column-reverse todo-list">
               {
-                props.phrases.map(({ phrase, id }) => {
+                props.phrases.sort((a, b) => a.createdAt - b.createdAt).map(({ phrase, id }) => {
                   return (
                     <li>
                       <div className="form-check" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
