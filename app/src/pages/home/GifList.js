@@ -10,7 +10,10 @@ function GitList(props) {
   return (
     <Fragment>
       {
-        props.gifs.length > 0 && props.gifs.map((gif) => (
+        props.gifs.length > 0 && props.gifs.sort((a, b) => {
+          console.log(a.createdAt)
+          return a.createdAt - b.createdAt
+        }).map((gif) => (
           <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
             <img
               src={gif.url}

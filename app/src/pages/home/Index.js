@@ -40,15 +40,15 @@ function Home() {
   }
 
   async function getGifs(phrases) {
-    phrases.forEach(async item => {
-      const result = await axios.get(Giphy.API.handler(item.phrase))
-      setGifs(state => [...state, { id: item.id, url: result.data.data[0].images.original.url }])
+    phrases.forEach(async ({id, phrase, createdAt}) => {
+      const result = await axios.get(Giphy.API.handler(phrase))
+      setGifs(state => [...state, { id, createdAt, url: result.data.data[0].images.original.url }])
     })
   }
 
-  async function addGif(id, phrase) {
+  async function addGif({id, phrase, createdAt}) {
     const result = await axios.get(Giphy.API.handler(phrase))
-    setGifs(state => [{ id: id, url: result.data.data[0].images.original.url }, ...state])
+    setGifs(state => [{ id, createdAt,  url: result.data.data[0].images.original.url }, ...state])
   }
 
   async function deleteGif(id) {
@@ -68,7 +68,7 @@ function Home() {
 
       setPhrase("")
       setPhrases(state => [...state, result.data.body])
-      addGif(result.data.body.id, phrase)
+      addGif(result.data.body)
       notifyAdd()
 
     } catch (error) {

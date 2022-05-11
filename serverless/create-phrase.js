@@ -24,7 +24,7 @@ module.exports.createPhrase = async (context) => {
     id: Math.round(Date.now() + Math.random() * 1000),
     phrase: context.phrase,
     userId: context.userId,
-    createdAt: new Date()
+    createdAt: Date.now()
   }
 
   await ddb.put({
