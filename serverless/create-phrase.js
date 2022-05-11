@@ -23,7 +23,8 @@ module.exports.createPhrase = async (context) => {
   const data = {
     id: Math.round(Date.now() + Math.random() * 1000),
     phrase: context.phrase,
-    userId: context.userId
+    userId: context.userId,
+    createdAt: new Date()
   }
 
   await ddb.put({
