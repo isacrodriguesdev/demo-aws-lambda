@@ -48,7 +48,7 @@ function Home() {
 
   async function addGif(id, phrase) {
     const result = await axios.get(Giphy.API.handler(phrase))
-    setGifs(state => [...state, { id: id, url: result.data.data[0].images.original.url }])
+    setGifs(state => [{ id: id, url: result.data.data[0].images.original.url }, ...state])
   }
 
   async function deleteGif(id) {
